@@ -27,6 +27,7 @@ kustomize-demo/
         ├── kustomization.yaml
         ├── patch-config.yaml
         └── patch-resources.yaml
+```
 
 graph TD
     subgraph Shared Base
