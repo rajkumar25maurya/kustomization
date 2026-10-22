@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: raj-nginx-config
+  name: nginx-config
 data:
     ENVIRONMENT: "base"
     LOG_LEVEL: "info"

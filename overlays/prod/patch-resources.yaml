@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: raj-dev-nginx
+  name: nginx
 spec:
   template:
     spec:
@@ -12,5 +12,5 @@ spec:
             cpu: "200m"
             memory: "256Mi"
           limits:
-            cpu: "450m"
-            memory: "550Mi"
+            cpu: "1000m"
+            memory: "1Gi"

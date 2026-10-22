@@ -1,17 +1,17 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: prod-ns
+namespace: dev
 
 bases:
   - ../../base
 
 # Modify metadata names globally or apply specific overrides
-namePrefix: prod-
+namePrefix: dev-
 
 replicas:
-  - name: raj-prod-nginx
-    count: 3
+  - name: nginx
+    count: 2
 
-patchesStrategicMerge:
-  - patch-config.yaml
-  - patch-resources.yaml
+patches:
+  - path: patch-config.yaml
+  - path: patch-resources.yaml
