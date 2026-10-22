@@ -30,7 +30,10 @@ kustomize-demo/
 
 graph TD
     subgraph Shared Base
-        B[base/<br/>- deployment.yaml<br/>- configmap.yaml<br/>- service.yaml]
+        B["base/
+        - deployment.yaml
+        - configmap.yaml
+        - service.yaml"]
     end
 
     B --> D
@@ -38,12 +41,20 @@ graph TD
     B --> P
 
     subgraph Environment Overlays
-        D[overlays/dev/<br/>- Replicas: 1<br/>- CPU: 50m/200m<br/>- Env: development]
-        S[overlays/stage/<br/>- Replicas: 2<br/>- CPU: 100m/500m<br/>- Env: staging]
-        P[overlays/prod/<br/>- Replicas: 3<br/>- CPU: 200m/1000m<br/>- Env: production]
+        D["overlays/dev/
+        - Replicas: 1
+        - CPU: 50m/200m
+        - Env: development"]
+        S["overlays/stage/
+        - Replicas: 2
+        - CPU: 100m/500m
+        - Env: staging"]
+        P["overlays/prod/
+        - Replicas: 3
+        - CPU: 200m/1000m
+        - Env: production"]
     end
 
     D -->|oc apply -k| CN1((Dev Namespace))
     S -->|oc apply -k| CN2((Stage Namespace))
     P -->|oc apply -k| CN3((Prod Namespace))
-    
