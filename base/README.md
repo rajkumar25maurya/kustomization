@@ -4,16 +4,15 @@ This repository uses **Kustomize** to manage Kubernetes / OpenShift manifests ac
 
 ---
 
-## 📁 Directory Structure
+## 📁 Directory Structure & Architecture
 
-```text
-kustomize-demo/
+````text
+.
 ├── README.md
-├── base/
-│   ├── kustomization.yaml
-│   ├── deployment.yaml
-│   ├── configmap.yaml
-│   └── service.yaml
+├── kustomization.yaml
+├── deployment.yaml
+├── config.yaml
+├── service.yaml
 └── overlays/
     ├── dev/
     │   ├── kustomization.yaml
@@ -29,33 +28,15 @@ kustomize-demo/
         └── patch-resources.yaml
 ```
 
+```mermaid
 graph TD
-    subgraph Shared Base
-        B["base/
-        - deployment.yaml
-        - configmap.yaml
-        - service.yaml"]
-    end
+    B["Shared manifests<br/>Deployment, ConfigMap, Service"]
 
-    B --> D
-    B --> S
-    B --> P
+    B --> D["dev<br/>Namespace: dev-ns<br/>Replicas declared: 3<br/>CPU request/limit: 200m / 450m<br/>Environment: dev"]
+    B --> S["stage<br/>Namespace: stage-ns<br/>Replicas declared: 3<br/>CPU request/limit: 200m / 400m<br/>Environment: stage"]
+    B --> P["prod<br/>Namespace: prod-ns<br/>Replicas declared: 3<br/>CPU request/limit: 200m / 1000m<br/>Environment: production"]
 
-    subgraph Environment Overlays
-        D["overlays/dev/
-        - Replicas: 1
-        - CPU: 50m/200m
-        - Env: development"]
-        S["overlays/stage/
-        - Replicas: 2
-        - CPU: 100m/500m
-        - Env: staging"]
-        P["overlays/prod/
-        - Replicas: 3
-        - CPU: 200m/1000m
-        - Env: production"]
-    end
-
-    D -->|oc apply -k| CN1((Dev Namespace))
-    S -->|oc apply -k| CN2((Stage Namespace))
-    P -->|oc apply -k| CN3((Prod Namespace))
+    D -->|oc apply -k| DN((Dev Namespace))
+    S -->|oc apply -k| SN((Stage Namespace))
+    P -->|oc apply -k| PN((Prod Namespace))
+```
