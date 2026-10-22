@@ -66,4 +66,27 @@ resources:
   - ../../base
 ```
 
+## Deployment workflow
+
+```mermaid
+flowchart TD
+    Base["Shared base<br/>Deployment, ConfigMap, Service"]
+    Choose{"Choose environment"}
+
+    Base --> Choose
+
+    Choose --> Dev["Dev overlay<br/>namespace: dev<br/>prefix: dev-"]
+    Choose --> Stage["Stage overlay<br/>namespace: stage<br/>prefix: stage-"]
+    Choose --> Prod["Prod overlay<br/>namespace: prod<br/>prefix: prod-"]
+
+    Dev --> Kustomize["Kustomize combines base<br/>with overlay settings and patches"]
+    Stage --> Kustomize
+    Prod --> Kustomize
+
+    Kustomize --> Render["Render manifests<br/>oc kustomize overlays/&lt;environment&gt;"]
+    Render --> Review["Review rendered resources"]
+    Review --> Apply["Apply selected overlay<br/>oc apply -k overlays/&lt;environment&gt;"]
+    Apply --> Cluster["Resources created or updated<br/>in the target namespace"]
+```
+
 This is the current Kustomize form and avoids the deprecation warning associated with `bases:`.
