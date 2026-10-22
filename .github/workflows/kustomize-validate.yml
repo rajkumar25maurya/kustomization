@@ -1,0 +1,31 @@
+name: Validate Kustomize overlays
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-overlays:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: v1.32.0
+
+      - name: Build overlays
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          for overlay in dev stage prod; do
+            echo "Building overlays/${overlay}"
+            kubectl kustomize "overlays/${overlay}" > /dev/null
+          done
