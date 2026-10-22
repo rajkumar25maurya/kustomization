@@ -6,7 +6,7 @@ This repository uses **Kustomize** to manage Kubernetes / OpenShift manifests ac
 
 ## 📁 Directory Structure & Architecture
 
-````text
+```text
 .
 ├── README.md
 ├── kustomization.yaml
