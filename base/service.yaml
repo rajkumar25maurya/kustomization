@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: raj-nginx-svc
+spec:
+  selector:
+    app: raj-nginx
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP

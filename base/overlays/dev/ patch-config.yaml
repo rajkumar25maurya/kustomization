@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: raj-nginx-config
+data:
+  ENVIRONMENT: "dev"
+  LOG_LEVEL: "error"

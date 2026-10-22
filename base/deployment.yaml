@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: raj-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: raj-nginx
+  template:
+    metadata:
+      labels:
+        app: raj-nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: raj-nginx-config
+---
