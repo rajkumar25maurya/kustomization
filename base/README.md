@@ -46,3 +46,4 @@ graph TD
     D -->|oc apply -k| CN1((Dev Namespace))
     S -->|oc apply -k| CN2((Stage Namespace))
     P -->|oc apply -k| CN3((Prod Namespace))
+    
