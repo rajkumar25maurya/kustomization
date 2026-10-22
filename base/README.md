@@ -32,8 +32,8 @@ This repository uses **Kustomize** to manage Kubernetes / OpenShift manifests ac
 graph TD
     B["Shared manifests<br/>Deployment, ConfigMap, Service"]
 
-    B --> D["dev<br/>Namespace: dev-ns<br/>Replicas declared: 3<br/>CPU request/limit: 200m / 450m<br/>Environment: dev"]
-    B --> S["stage<br/>Namespace: stage-ns<br/>Replicas declared: 3<br/>CPU request/limit: 200m / 400m<br/>Environment: stage"]
+    B --> D["dev<br/>Namespace: dev-ns<br/>Replicas declared: 2<br/>CPU request/limit: 200m / 450m<br/>Environment: dev"]
+    B --> S["stage<br/>Namespace: stage-ns<br/>Replicas declared: 2<br/>CPU request/limit: 200m / 400m<br/>Environment: stage"]
     B --> P["prod<br/>Namespace: prod-ns<br/>Replicas declared: 3<br/>CPU request/limit: 200m / 1000m<br/>Environment: production"]
 
     D -->|oc apply -k| DN((Dev Namespace))
